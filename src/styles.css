@@ -1,0 +1,179 @@
+:root {
+  --bg: #f4f5f7;
+  --panel: #ffffff;
+  --border: #d9dde3;
+  --accent: #1f6feb;
+  --accent-soft: #e4eeff;
+  --text: #1f2328;
+  --muted: #656d76;
+  --danger: #cf222e;
+  --event-fill: #fff7d6;
+  --task-fill: #e8f1ff;
+  --gateway-fill: #fff0e0;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 14px;
+  color: var(--text);
+  background: var(--bg);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 14px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+}
+
+.toolbar h1 {
+  font-size: 16px;
+  margin: 0 12px 0 0;
+  color: var(--accent);
+}
+
+.toolbar-group {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+button, .file-label {
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--text);
+  cursor: pointer;
+  font: inherit;
+}
+
+button:hover, .file-label:hover { background: var(--accent-soft); }
+button.tool.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.file-label input { display: none; }
+
+.workspace {
+  display: grid;
+  grid-template-columns: 220px 1fr 260px;
+  flex: 1;
+  min-height: 0;
+}
+
+.palette, .properties {
+  background: var(--panel);
+  padding: 12px;
+  overflow: auto;
+}
+
+.palette { border-right: 1px solid var(--border); }
+.properties { border-left: 1px solid var(--border); }
+
+.palette h2, .properties h2 {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--muted);
+  margin: 8px 0;
+}
+
+.palette-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px;
+  margin-bottom: 4px;
+  border: 1px dashed transparent;
+  border-radius: 6px;
+  cursor: grab;
+  user-select: none;
+}
+
+.palette-item:hover { border-color: var(--accent); background: var(--accent-soft); }
+.palette-item svg { width: 36px; height: 36px; flex: none; }
+.palette-item span { font-size: 13px; }
+
+.hint {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.canvas-wrap {
+  overflow: auto;
+  background: #fff;
+}
+
+#canvas { display: block; }
+#canvas.connect-mode { cursor: crosshair; }
+
+/* фигуры */
+.shape-event { fill: var(--event-fill); stroke: #333; stroke-width: 2; }
+.shape-event.end { stroke-width: 4; }
+.shape-task { fill: var(--task-fill); stroke: #333; stroke-width: 2; }
+.shape-gateway { fill: var(--gateway-fill); stroke: #333; stroke-width: 2; }
+.shape-icon { fill: #333; }
+.shape-label { font-size: 22px; text-anchor: middle; fill: #333; font-weight: bold; }
+
+.node { cursor: move; }
+.node text.label {
+  font-size: 12px;
+  text-anchor: middle;
+  fill: #1f2328;
+  pointer-events: none;
+}
+.node.selected .shape-event,
+.node.selected .shape-task,
+.node.selected .shape-gateway { stroke: var(--accent); stroke-width: 3; }
+.node.connect-source .shape-event,
+.node.connect-source .shape-task,
+.node.connect-source .shape-gateway { stroke: #2da44e; stroke-width: 3; stroke-dasharray: 6 3; }
+
+.flow path { fill: none; stroke: #333; stroke-width: 2; marker-end: url(#arrow); }
+.flow path.hit { stroke: transparent; stroke-width: 12; marker-end: none; }
+.flow.selected path:not(.hit) { stroke: var(--accent); stroke-width: 3; }
+.flow text { font-size: 11px; fill: #444; text-anchor: middle; }
+
+/* свойства */
+.properties label {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.properties input, .properties textarea {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 6px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font: inherit;
+  color: var(--text);
+}
+
+.hidden { display: none; }
+
+#stats, #validation { padding-left: 18px; margin: 0; font-size: 13px; }
+#validation li.ok { color: #1a7f37; }
+#validation li.warn { color: #9a6700; }
+#validation li.error { color: var(--danger); }
+
+.statusbar {
+  padding: 4px 14px;
+  font-size: 12px;
+  color: var(--muted);
+  background: var(--panel);
+  border-top: 1px solid var(--border);
+}
