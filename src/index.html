@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BPMN Constructor — конструктор диаграмм BPMN</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="toolbar">
+    <h1>BPMN Constructor</h1>
+    <div class="toolbar-group">
+      <button id="btn-select" class="tool active" title="Выделение и перемещение (V)">Выбор</button>
+      <button id="btn-connect" class="tool" title="Соединение элементов потоком (C)">Соединить</button>
+      <button id="btn-delete" class="tool" title="Удалить выделенное (Delete)">Удалить</button>
+    </div>
+    <div class="toolbar-group">
+      <button id="btn-save" title="Сохранить в localStorage">Сохранить</button>
+      <button id="btn-load" title="Загрузить из localStorage">Загрузить</button>
+      <button id="btn-export-xml" title="Экспорт в BPMN 2.0 XML">Экспорт BPMN XML</button>
+      <button id="btn-export-json" title="Экспорт модели в JSON">Экспорт JSON</button>
+      <label class="file-label">Импорт JSON<input id="file-import" type="file" accept=".json"></label>
+      <button id="btn-clear" title="Очистить холст">Очистить</button>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <aside class="palette">
+      <h2>Элементы</h2>
+      <div class="palette-item" draggable="true" data-type="startEvent">
+        <svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" class="shape-event"/></svg>
+        <span>Начальное событие</span>
+      </div>
+      <div class="palette-item" draggable="true" data-type="endEvent">
+        <svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" class="shape-event end"/></svg>
+        <span>Конечное событие</span>
+      </div>
+      <div class="palette-item" draggable="true" data-type="intermediateEvent">
+        <svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" class="shape-event"/><circle cx="20" cy="20" r="12" class="shape-event"/></svg>
+        <span>Промежуточное событие</span>
+      </div>
+      <div class="palette-item" draggable="true" data-type="task">
+        <svg viewBox="0 0 40 40"><rect x="3" y="9" width="34" height="22" rx="4" class="shape-task"/></svg>
+        <span>Задача</span>
+      </div>
+      <div class="palette-item" draggable="true" data-type="userTask">
+        <svg viewBox="0 0 40 40"><rect x="3" y="9" width="34" height="22" rx="4" class="shape-task"/><circle cx="10" cy="15" r="2.5" class="shape-icon"/></svg>
+        <span>Пользовательская задача</span>
+      </div>
+      <div class="palette-item" draggable="true" data-type="exclusiveGateway">
+        <svg viewBox="0 0 40 40"><polygon points="20,3 37,20 20,37 3,20" class="shape-gateway"/><text x="20" y="25" class="shape-label">×</text></svg>
+        <span>Исключающий шлюз</span>
+      </div>
+      <div class="palette-item" draggable="true" data-type="parallelGateway">
+        <svg viewBox="0 0 40 40"><polygon points="20,3 37,20 20,37 3,20" class="shape-gateway"/><text x="20" y="25" class="shape-label">+</text></svg>
+        <span>Параллельный шлюз</span>
+      </div>
+      <p class="hint">Перетащите элемент на холст. Двойной щелчок — изменить подпись.
+        Режим «Соединить»: щёлкните источник, затем цель.</p>
+    </aside>
+
+    <section class="canvas-wrap">
+      <svg id="canvas" xmlns="http://www.w3.org/2000/svg" width="2000" height="1400">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#333"/>
+          </marker>
+          <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#e6e6e6" stroke-width="1"/>
+          </pattern>
+        </defs>
+        <rect id="grid-bg" width="100%" height="100%" fill="url(#grid)"/>
+        <g id="layer-flows"></g>
+        <g id="layer-nodes"></g>
+      </svg>
+    </section>
+
+    <aside class="properties">
+      <h2>Свойства</h2>
+      <div id="props-empty">Ничего не выбрано</div>
+      <form id="props-form" class="hidden">
+        <label>Идентификатор<input id="prop-id" type="text" readonly></label>
+        <label>Тип<input id="prop-type" type="text" readonly></label>
+        <label>Название<input id="prop-name" type="text" maxlength="80"></label>
+        <label>Документация<textarea id="prop-doc" rows="4" maxlength="500"></textarea></label>
+      </form>
+      <h2>Статистика</h2>
+      <ul id="stats">
+        <li>Элементов: <b id="stat-nodes">0</b></li>
+        <li>Потоков: <b id="stat-flows">0</b></li>
+      </ul>
+      <h2>Проверка модели</h2>
+      <ul id="validation"></ul>
+    </aside>
+  </main>
+
+  <footer class="statusbar"><span id="status">Готово</span></footer>
+
+  <script src="model.js"></script>
+  <script src="bpmn-export.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
