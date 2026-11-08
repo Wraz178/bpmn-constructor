@@ -9,9 +9,9 @@
 ## 2. Получение исходного кода
 
 ```bash
-git clone git@github.com:<account>/bpmn-constructor.git
+git clone git@github.com:Wraz178/bpmn-constructor.git
 # или по HTTPS
-git clone https://github.com/<account>/bpmn-constructor.git
+git clone https://github.com/Wraz178/bpmn-constructor.git
 cd bpmn-constructor
 ```
 

@@ -2,10 +2,10 @@
 # Владелец репозитория — руководитель проекта — согласует изменения во всех разделах.
 # Синтаксис: <шаблон пути> <@пользователь или @организация/команда>
 
-*                       @PROJECT_OWNER
-docs/01_initiation/     @PROJECT_OWNER
-docs/02_analysis/       @PROJECT_OWNER   # роль: аналитик
-docs/03_design/         @PROJECT_OWNER   # роль: архитектор
-src/                    @PROJECT_OWNER   # роль: разработчик
-tests/                  @PROJECT_OWNER   # роль: тестировщик
-docs/05_deployment/     @PROJECT_OWNER   # роль: инженер внедрения
+*                       @Wraz178
+docs/01_initiation/     @Wraz178
+docs/02_analysis/       @Wraz178   # роль: аналитик
+docs/03_design/         @Wraz178   # роль: архитектор
+src/                    @Wraz178   # роль: разработчик
+tests/                  @Wraz178   # роль: тестировщик
+docs/05_deployment/     @Wraz178   # роль: инженер внедрения
