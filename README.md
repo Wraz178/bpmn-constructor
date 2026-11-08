@@ -43,3 +43,7 @@ open src/index.html        # macOS; в Windows — start src\index.html
 ## Лицензия
 
 MIT — см. файл `LICENSE`.
+
+## Статус проекта
+
+Версия 1.0.0 — релиз-кандидат.
