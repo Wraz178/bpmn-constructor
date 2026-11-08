@@ -35,7 +35,7 @@
 ## Быстрый старт
 
 ```bash
-git clone git@github.com:<account>/bpmn-constructor.git
+git clone git@github.com:Wraz178/bpmn-constructor.git
 cd bpmn-constructor
 open src/index.html        # macOS; в Windows — start src\index.html
 ```
